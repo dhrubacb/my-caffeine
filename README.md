@@ -23,7 +23,7 @@ Add the following dependency to your pom.xml (replace with your actual coordinat
 XML
 
 <dependency>
-    <groupId>com.yourname</groupId>
+    <groupId>com.github.dhruba</groupId>
     <artifactId>my-caffeine</artifactId>
     <version>1.0.0</version>
 </dependency>
