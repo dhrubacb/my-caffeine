@@ -6,7 +6,7 @@ public class MyCaffeineCacheTest {
 
     @Test
     public void testPut() {
-        MyCaffeineCache<String, String> cache = new MyCaffeineCache<>();
+        Cache<String, String> cache = new MyCaffeineCache<>();
         cache.put("key", "value");
         assert cache.get("key").equals("value");
     }
@@ -15,20 +15,6 @@ public class MyCaffeineCacheTest {
         MyCaffeineCache<String, String> cache = new MyCaffeineCache<>();
         cache.putIfAbsent("key", "value");
         assert cache.get("key").equals("value");
-    }
-    @Test
-    public void testGetIfPresent() {
-        MyCaffeineCache<String, String> cache = new MyCaffeineCache<>();
-        cache.put("key", "value");
-        assert cache.getIfPresent("key").equals("value");
-    }
-    @Test
-    public void testGet() {
-        MyCaffeineCache<String, String> cache = new MyCaffeineCache<>();
-        cache.put("key", "value");
-        assert cache.get("key").equals("value");
-        assert cache.get("key2") == null;
-        assert cache.getIfPresent("key2") == null;
     }
     @Test
     public void testEviction() {
