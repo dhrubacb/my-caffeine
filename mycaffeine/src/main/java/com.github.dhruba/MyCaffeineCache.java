@@ -4,28 +4,22 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class MyCaffeineCache<K, V> implements Cache<K, V> {
-    ConcurrentMap<K, V> concurrentMap = new ConcurrentHashMap<>();
-
-    @Override
-    public V getIfPresent(K key) {
-        if (concurrentMap.containsKey(key)) {
-            return concurrentMap.get(key);
-        }
-        return null;
-    }
+    private final ConcurrentMap<K, CacheNode<K, V>> concurrentMap = new ConcurrentHashMap<>();
 
     @Override
     public V get(K key) {
         if (concurrentMap.containsKey(key)) {
-            return concurrentMap.get(key);
+            CacheNode<K, V> kvCache = concurrentMap.get(key);
+            if (kvCache != null)
+                return kvCache.getValue();
         }
-        // TODO: Implement cache loading mechanism
         return null;
     }
 
     @Override
     public boolean put(K key, V value) {
-        concurrentMap.put(key, value);
+        CacheNode<K, V> kvCache = new CacheNode<>(key, value);
+        concurrentMap.put(key, kvCache);
         // TODO: Implement cache eviction mechanism
         return true;
     }
@@ -35,8 +29,12 @@ public class MyCaffeineCache<K, V> implements Cache<K, V> {
         if (concurrentMap.containsKey(key)) {
             return false;
         }
-        concurrentMap.put(key, value);
-        // TODO: Implement cache eviction mechanism
-        return true;
+        return put(key, value);
     }
+
+    @Override
+    public void remove(K key) {
+        concurrentMap.remove(key);
+    }
+
 }
