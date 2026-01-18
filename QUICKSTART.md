@@ -4,11 +4,6 @@
 
 ### 1. Extract the Archive
 
-```bash
-unzip ai-cache-prototype.zip
-cd ai-cache-prototype
-```
-
 ### 2. Build the Project
 
 ```bash
