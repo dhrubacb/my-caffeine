@@ -306,7 +306,7 @@ This is a prototype for educational and research purposes. Contributions, sugges
 
 ## Author
 
-Based on the my-caffeine project by dhrubacb, with AI enhancements for the prototype.
+dhrubacb
 
 ---
 
